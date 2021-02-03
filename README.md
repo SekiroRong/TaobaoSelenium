@@ -1,1 +1,2 @@
 # TaobaoSelenium
+这是鄙人尝试使用Selenium进行淘宝购物车内商品抢购的项目
