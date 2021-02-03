@@ -1,9 +1,8 @@
 # -*- coding = utf-8 -*-
-# @Time : 1/2/2021 11:00
+# @Time : 2/2/2021 19:09
 # @Author : 戎昱
 # @File : main.py
 # @Software : PyCharm
-
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
 from selenium.webdriver.common.by import By
@@ -19,42 +18,45 @@ from datetime import datetime
 import pickle
 import os
 
-# 刷新页面
-# browser.refresh()
 def slider_kill(browser):
     try:
         sour = browser.find_element_by_id("nc_1_n1z")  # 获取滑块
         ele = browser.find_element_by_id("nc_1__scale_text")  # 获取整个滑块框
         if sour:
-            print("存在滑块")
-            print(ele.size, ele.location['x'])
+            try:
+                print("存在滑块")
+                print(ele.size, ele.location['x'])
 
-            action = ActionChains(browser)
-            action.click_and_hold(on_element=sour).perform()
-            print(sour.size)
-            print(sour.location['x'])
-            time.sleep(0.15)
-            ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=30, yoffset=0).perform()
-            time.sleep(1)
-            print(30, sour.location['x'], sour.location['y'])
-            ActionChains(browser).move_to_element_wit_offset(to_element=sour, xoffset=100, yoffset=0).perform()
-            time.sleep(0.5)
-            print(100, sour.location['x'], sour.location['y'])
-            ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=170, yoffset=0).perform()
-            time.sleep(0.3)
-            print(170, sour.location['x'], sour.location['y'])
-            ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=250, yoffset=0).perform()
-            time.sleep(0.2)
-            print(250, sour.location['x'], sour.location['y'])
-            ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=290,
-                                                              yoffset=0).release().perform()
-            print(290, sour.location['x'], sour.location['y'])
-            print("滑块完成")
-            # browser.refresh()
-            # time.sleep(0.1)
-            # slider_kill(browser)
+                action = ActionChains(browser)
+                action.click_and_hold(on_element=sour).perform()
+                print(sour.size)
+                print(sour.location['x'])
+                time.sleep(0.15)
+                ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=30, yoffset=0).perform()
+                time.sleep(1)
+                print(30, sour.location['x'], sour.location['y'])
+                ActionChains(browser).move_to_element_wit_offset(to_element=sour, xoffset=100, yoffset=0).perform()
+                time.sleep(0.5)
+                print(100, sour.location['x'], sour.location['y'])
+                ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=170, yoffset=0).perform()
+                time.sleep(0.3)
+                print(170, sour.location['x'], sour.location['y'])
+                ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=250, yoffset=0).perform()
+                time.sleep(0.2)
+                print(250, sour.location['x'], sour.location['y'])
+                ActionChains(browser).move_to_element_with_offset(to_element=sour, xoffset=290,
+                                                                  yoffset=0).release().perform()
+                print(290, sour.location['x'], sour.location['y'])
+                print("滑块完成")
+                # browser.refresh()
+                # time.sleep(0.1)
+                # slider_kill(browser)
+            except:
+                print("滑块验证码失败")
+                slider_kill(browser)
     except:
-        print("不存在滑块")
+        print("不存在滑块验证码")
+
 def time_server():
     # 获取淘宝服务器的时间戳
     r1 = requests.get(url='http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp',
@@ -68,23 +70,23 @@ def time_server():
     print(time1)
     return time1
 def login(browser):
-    button = browser.find_element_by_class_name("sn-login")
-    button.click()
-    time.sleep(0.5)
-
-    myindex = browser.find_element_by_id("J_loginIframe")  # 处理内嵌的网页链接
-    browser.get(myindex.get_attribute("src"))
+    # button = browser.find_element_by_class_name("sn-login")
+    # button.click()
+    # time.sleep(0.5)
+    #
+    # myindex = browser.find_element_by_id("J_loginIframe")  # 处理内嵌的网页链接
+    # browser.get(myindex.get_attribute("src"))
     username = browser.find_element_by_id("fm-login-id")
-    username.send_keys("17798533596")
+    username.send_keys("15850502589")
     time.sleep(0.1)
     cipher = browser.find_element_by_id("fm-login-password")
-    cipher.send_keys("spidertest123")
+    cipher.send_keys("rongyu123")
     time.sleep(0.1)
     button = browser.find_element_by_class_name("fm-btn")
     button.click()
     slider_kill(browser)
     print("登录完成")
-    time.sleep(30)
+    #time.sleep(30)
 def purchase(browser):
     button = browser.find_element_by_id("J_LinkBasket")
     button.click()
@@ -106,11 +108,11 @@ def purchase(browser):
     # button = browser.find_element_by_class_name("go-btn")
     # button.click()
 def main():
-    start_time = '2021-02-01 19:59:59'
+    start_time = '2021-02-03 20:00:00'
     timeArray = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-    now = time_server()
-    print(now)
-    url = "https://chaoshi.detail.tmall.com/item.htm?spm=a3204.17709488.5400028360.2.1985c6c0P7dSLo&id=20739895092&from_scene=B2C"
+    #now = time_server()
+    # print(now)
+    url = "https://cart.taobao.com/cart.htm"
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
     browser = webdriver.Chrome(options=options)
@@ -120,52 +122,59 @@ def main():
     browser.get(url)
     time.sleep(1)
     login(browser)
-    time.sleep(5)
+    time.sleep(2)
     #print(browser.page_source)
     # time.sleep(1)
     # browser.refresh()
     # time.sleep(0.5)
     # purchase(browser)
     #
-    browser.refresh()
-    time.sleep(5)
+    # browser.refresh()
+    # time.sleep(5)
+    button = browser.find_element_by_class_name("cart-checkbox")
+    button.click()
+    print("全选购物车")
+    jiesuan = browser.find_element_by_class_name("btn-area")
     #print(browser.page_source)
     i = 0
     start = 1
     while start:
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(now)
         # 判断时间服务器时间是否大于或等于输入的时间
-        if time_server() >= timeArray:
+        if now >= start_time:
             start = 0
     print("开始抢购")
+    # button = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'cart-checkbox')))
+    # button.click()
+    # print("全选购物车")
     while True:
         try:
-            button = browser.find_element_by_id("J_LinkBasket")
-            button.click()
-            print("尝试加入购物车")
-            weight = browser.find_element_by_xpath('.//a[@class="tm-mcWeightTotal"]/strong')
-            print("Weight="+weight.text)
-            if (weight.text != '0'):
-                print("加入购物车成功")
-                button = browser.find_element_by_class_name("sn-cart-link")
-                button.click()
-                print("进入购物车")
+            if (browser.current_url == url):
+                print("尝试结算")
+                jiesuan.click()
+                browser.switch_to.window(browser.window_handles[1])
+            # slider_kill(browser)
+            else:   # 进入结算界面
+                print("进入结算界面")
                 slider_kill(browser)
                 try:
-                    tjdd = wait.until(
-                        EC.presence_of_element_located((By.CLASS_NAME, 'cart-checkbox')))
-                    tjdd.click()
-                    print("全选购物车")
-                    button = browser.find_element_by_class_name("btn-area")
-                    time.sleep(1)
+                    button = wait.until(
+                        EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
                     button.click()
-                    print("结算")
-                    slider_kill(browser)
+                    print("付款")
+                    #slider_kill(browser)
+                    break
+                except:
+                    browser.refresh()
+                    print("付款失败")
                     try:
                         button = wait.until(
                             EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
                         button.click()
                         print("付款")
-                        slider_kill(browser)
+                        break
+                        #slider_kill(browser)
                     except:
                         browser.refresh()
                         print("付款失败")
@@ -174,112 +183,22 @@ def main():
                                 EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
                             button.click()
                             print("付款")
-                            slider_kill(browser)
-                        except:
-                            browser.refresh()
-                            print("付款失败")
-                            try:
-                                button = wait.until(
-                                    EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                                button.click()
-                                print("付款")
-                                slider_kill(browser)
-                            except:
-                                print("抢购失败")
-                                break
-                except:
-                    browser.refresh()
-                    print("结算失败")
-                    try:
-                        tjdd = wait.until(
-                            EC.presence_of_element_located((By.CLASS_NAME, 'cart-checkbox')))
-                        tjdd.click()
-                        print("全选购物车")
-                        time.sleep(1)
-                        button = browser.find_element_by_class_name("btn-area")
-                        button.click()
-                        print("结算")
-                        slider_kill(browser)
-                        try:
-                            button = wait.until(
-                                EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                            button.click()
-                            print("付款")
-                            slider_kill(browser)
-                        except:
-                            browser.refresh()
-                            print("付款失败")
-                            try:
-                                button = wait.until(
-                                    EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                                button.click()
-                                print("付款")
-                                slider_kill(browser)
-                            except:
-                                browser.refresh()
-                                print("付款失败")
-                                try:
-                                    button = wait.until(
-                                        EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                                    button.click()
-                                    print("付款")
-                                    slider_kill(browser)
-                                except:
-                                    print("抢购失败")
-                                    break
-                    except:
-                        browser.refresh()
-                        print("结算失败")
-                        try:
-                            tjdd = wait.until(
-                                EC.presence_of_element_located((By.CLASS_NAME, 'cart-checkbox')))
-                            tjdd.click()
-                            print("全选购物车")
-                            time.sleep(1)
-                            button = browser.find_element_by_class_name("btn-area")
-                            button.click()
-                            print("结算")
-                            slider_kill(browser)
-                            try:
-                                button = wait.until(
-                                    EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                                button.click()
-                                print("付款")
-                                slider_kill(browser)
-                            except:
-                                browser.refresh()
-                                print("付款失败")
-                                try:
-                                    button = wait.until(
-                                        EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                                    button.click()
-                                    print("付款")
-                                    slider_kill(browser)
-                                except:
-                                    browser.refresh()
-                                    print("付款失败")
-                                    try:
-                                        button = wait.until(
-                                            EC.presence_of_element_located((By.CLASS_NAME, 'go-btn')))
-                                        button.click()
-                                        print("付款")
-                                        slider_kill(browser)
-                                    except:
-                                        print("抢购失败")
-                                        break
+                            break
+                            #slider_kill(browser)
                         except:
                             print("抢购失败")
                             break
-            else:
-                button = browser.find_element_by_id("J_LinkBasket")
-                button.click()
-                print("尝试加入购物车")
-                time.sleep(0.2)
         except:
-            print("找不到购物车")
-            browser.refresh()
-            slider_kill(browser)
+            print("出错了")
+            # print("找不到结算")
+            # time.sleep(3)
+            # slider_kill(browser)
+            # button = browser.find_element_by_class_name("cart-checkbox")
+            # #button = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'cart-checkbox')))
+            # button.click()
+            # print("全选购物车")
             continue
+    print("抢购成功请付款")
     time.sleep(500)
     browser.close()
 
