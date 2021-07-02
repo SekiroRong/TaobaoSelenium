@@ -77,10 +77,10 @@ def login(browser):
     # myindex = browser.find_element_by_id("J_loginIframe")  # 处理内嵌的网页链接
     # browser.get(myindex.get_attribute("src"))
     username = browser.find_element_by_id("fm-login-id")
-    username.send_keys("15850502589")
+    username.send_keys("*********")#Your Taobao ID
     time.sleep(0.1)
     cipher = browser.find_element_by_id("fm-login-password")
-    cipher.send_keys("rongyu123")
+    cipher.send_keys("*********")#Your cipher
     time.sleep(0.1)
     button = browser.find_element_by_class_name("fm-btn")
     button.click()
